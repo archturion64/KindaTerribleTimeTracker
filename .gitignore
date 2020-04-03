@@ -3,4 +3,4 @@ SqLiteConnector/bin/
 SqLiteConnector/obj/
 presenceApp/bin/
 presenceApp/obj/
-
+presenceApp/presence.db

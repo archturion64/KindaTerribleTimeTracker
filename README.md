@@ -17,14 +17,15 @@ To build, execute
 	dotnet build KindaTerribleTimeTracker.sln
 
 
-First time you start the application (or if you delete the databse file) you will see Error 12 which is a recoverable error.
-
 Example for application output of a run:
 
 	./presenceApp 
+	 Using culture en-US and DB connection Data Source=presence.db;Version=3;.
 	Date: Wed 01.04.2020 Week: 14 Start Time 8:31:22 AM, End Time 4:21:48 PM
 	Date: Thu 02.04.2020 Week: 14 Start Time 9:01:02 AM, End Time 3:50:22 PM
 	Press Enter to exit...
 
 Pressing enter will stop time tracking and will close the application.
+
+To change the date/time format, modify the appsettings.json "Culture"-variable.
 

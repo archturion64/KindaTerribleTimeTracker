@@ -1,6 +1,10 @@
 .vscode/
-SqLiteConnector/bin/
-SqLiteConnector/obj/
-presenceApp/bin/
-presenceApp/obj/
-presenceApp/presence.db
+KTTTApp/bin/
+KTTTApp/obj/
+KTTTApp/presence.db
+KTTTDataConnector/bin/
+KTTTDataConnector/obj/
+KTTTDataInterface/bin/
+KTTTDataInterface/obj/
+KTTTSQLiteConnector/bin/
+KTTTSQLiteConnector/obj/

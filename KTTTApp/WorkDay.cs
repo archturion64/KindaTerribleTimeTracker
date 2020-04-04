@@ -1,13 +1,13 @@
 using System;
-using SqLiteConnector;
 using System.Timers;
 using System.Globalization;
+using KTTTDataInterface;
 
-namespace presenceApp
+namespace KTTTApp
 {
     public class WorkDay
     {
-        private PresenceModel entryToday { get; set; }
+        private WorkDayModel entryToday { get; set; }
         
         private const int TIMER_INTERVAL = 600000; // in ms
 
@@ -15,9 +15,9 @@ namespace presenceApp
 
         private readonly CultureInfo culture;
 
-        private readonly SQLiteDataAccess dbAccess;
+        private readonly IDataAccess dbAccess;
 
-        public WorkDay(in CultureInfo cultureInf, in SQLiteDataAccess dataAcc)
+        public WorkDay(in CultureInfo cultureInf, in IDataAccess dataAcc)
         {
             culture = cultureInf;
             dbAccess = dataAcc;
@@ -61,11 +61,11 @@ namespace presenceApp
             return retVal;
         }
 
-        private PresenceModel generateNewEntry(in CultureInfo culture)
+        private WorkDayModel generateNewEntry(in CultureInfo culture)
         {
             DateTime startWork = DateTime.Now;
 
-            return new PresenceModel{
+            return new WorkDayModel{
                 calWeek = getCalenderWeek(startWork, culture),
                 date = startWork.ToString("ddd dd.MM.yyyy", culture),
                 startTime = startWork.ToString("T", culture),

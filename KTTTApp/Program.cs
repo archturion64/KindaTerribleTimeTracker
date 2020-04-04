@@ -1,8 +1,8 @@
 ﻿using System;
-using SqLiteConnector;
+using KTTTDataInterface;
+using KTTTDataConnector;
 
-
-namespace presenceApp
+namespace KTTTApp
 {
     class Program
     {
@@ -11,13 +11,13 @@ namespace presenceApp
             // read config
             AppliedConfig appConfig = new AppliedConfig();
 
-            // establish DB access
-            SQLiteDataAccess dbAccess = new SQLiteDataAccess(connString: appConfig.ConnnectionString);
+            // establish data access
+            IDataAccess connector = DataConnector.getDBConnector(appConfig.ConnnectionString);
 
-            WorkDay workDay = new WorkDay(appConfig.Culture, dbAccess);
+            WorkDay workDay = new WorkDay(appConfig.Culture, connector);
 
             // closest thing to UI at the moment
-            foreach (var entry in dbAccess.GetEntries())
+            foreach (var entry in connector.GetEntries())
             {
                 Console.WriteLine("Date: {0} Week: {1} Start Time {2}, End Time {3}",
                                   entry.date,

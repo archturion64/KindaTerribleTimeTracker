@@ -4,10 +4,11 @@ using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using Dapper;
+using KTTTDataInterface;
 
-namespace SqLiteConnector
+namespace KTTTSQLiteConnector
 {
-    public class SQLiteDataAccess
+    public class SQLiteDataAccess : IDataAccess
     {
         private readonly string connectionString;
 
@@ -26,29 +27,29 @@ namespace SqLiteConnector
             }
         }
 
-        public List<PresenceModel> GetEntries()
+        public List<WorkDayModel> GetEntries()
         {
             using (IDbConnection cnn = new SQLiteConnection(connectionString))
             {
                 try
                 {
-                    var output = cnn.Query<PresenceModel>("SELECT * FROM presence", new DynamicParameters());
+                    var output = cnn.Query<WorkDayModel>("SELECT * FROM presence", new DynamicParameters());
                     return output.ToList();
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 11: Database missing or Table is corrupted!");
                 }
             }
-            return new List<PresenceModel>();
+            return new List<WorkDayModel>();
         }
 
-        public void StoreEntry(in PresenceModel pm)
+        public void StoreEntry(in WorkDayModel entry)
         {
             using (IDbConnection cnn = new SQLiteConnection(connectionString))
             {
                 try
                 {
-                    cnn.Execute("insert or replace into presence (date, startTime, endTime, calWeek)values (@date, COALESCE((select startTime from presence where date = @date), @startTime), @endTime, @calWeek)", pm);
+                    cnn.Execute("insert or replace into presence (date, startTime, endTime, calWeek)values (@date, COALESCE((select startTime from presence where date = @date), @startTime), @endTime, @calWeek)", entry);
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 12: Database missing or Table is corrupted!");
@@ -56,13 +57,13 @@ namespace SqLiteConnector
             }
         }
 
-        public void UpdateEntry(in PresenceModel pm)
+        public void UpdateEntry(in WorkDayModel entry)
         {
             using (IDbConnection cnn = new SQLiteConnection(connectionString))
             {
                 try
                 {
-                    cnn.Execute("update presence set endTime = @endTime where date = @date", pm);
+                    cnn.Execute("update presence set endTime = @endTime where date = @date", entry);
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 13: Database missing or Table is corrupted!");

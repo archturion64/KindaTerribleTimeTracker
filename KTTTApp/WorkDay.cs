@@ -7,7 +7,7 @@ namespace KTTTApp
 {
     public class WorkDay
     {
-        private WorkDayModel entryToday { get; set; }
+        public WorkDayModel entryToday { get; private set; }
         
         private const int TIMER_INTERVAL = 600000; // in ms
 

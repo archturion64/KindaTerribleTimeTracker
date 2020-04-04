@@ -1,6 +1,9 @@
 .vscode/
 KTTTApp/bin/
 KTTTApp/obj/
+KTTTAppTest/bin/
+KTTTAppTest/obj/
+KTTTAppTest/TestResults/
 KTTTApp/presence.db
 KTTTDataConnector/bin/
 KTTTDataConnector/obj/

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTTTDataInterface", "KTTTDa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTTTSQLiteConnector", "KTTTSQLiteConnector\KTTTSQLiteConnector.csproj", "{413646E4-F7A5-4735-8735-8015A0D95B35}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KTTTAppTest", "KTTTAppTest\KTTTAppTest.csproj", "{53D605E4-E4FF-4223-93DB-DBA848F2E959}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,5 +158,17 @@ Global
 		{413646E4-F7A5-4735-8735-8015A0D95B35}.Release|x64.Build.0 = Release|Any CPU
 		{413646E4-F7A5-4735-8735-8015A0D95B35}.Release|x86.ActiveCfg = Release|Any CPU
 		{413646E4-F7A5-4735-8735-8015A0D95B35}.Release|x86.Build.0 = Release|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Debug|x64.Build.0 = Debug|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Debug|x86.Build.0 = Debug|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Release|x64.ActiveCfg = Release|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Release|x64.Build.0 = Release|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Release|x86.ActiveCfg = Release|Any CPU
+		{53D605E4-E4FF-4223-93DB-DBA848F2E959}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

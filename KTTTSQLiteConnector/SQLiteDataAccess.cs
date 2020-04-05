@@ -8,6 +8,9 @@ using KTTTDataInterface;
 
 namespace KTTTSQLiteConnector
 {
+    /// <summary>
+    /// SQLite functionality provider.
+    /// </summary>
     public class SQLiteDataAccess : IDataAccess
     {
         private readonly string connectionString;
@@ -27,6 +30,10 @@ namespace KTTTSQLiteConnector
             }
         }
 
+        /// <summary>
+        /// Dump table contents.
+        /// </summary>
+        /// <returns></returns>
         public List<WorkDayModel> GetEntries()
         {
             using (IDbConnection cnn = new SQLiteConnection(connectionString))
@@ -43,6 +50,10 @@ namespace KTTTSQLiteConnector
             return new List<WorkDayModel>();
         }
 
+        /// <summary>
+        /// Add new entry.
+        /// </summary>
+        /// <param name="entry"> Data model object</param>
         public void StoreEntry(in WorkDayModel entry)
         {
             using (IDbConnection cnn = new SQLiteConnection(connectionString))
@@ -57,6 +68,10 @@ namespace KTTTSQLiteConnector
             }
         }
 
+        /// <summary>
+        /// Update an existing entry.
+        /// </summary>
+        /// <param name="entry">Data model object</param>
         public void UpdateEntry(in WorkDayModel entry)
         {
             using (IDbConnection cnn = new SQLiteConnection(connectionString))

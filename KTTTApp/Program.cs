@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 using KTTTDataInterface;
 using KTTTDataConnector;
 
@@ -9,7 +11,9 @@ namespace KTTTApp
         static void Main(string[] args)
         {
             // read config
-            AppliedConfig appConfig = new AppliedConfig();
+            var appConfig = new AppliedConfig(new ConfigurationBuilder()
+                                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+                                .AddJsonFile("appsettings.json", false));
 
             // establish data access
             IDataAccess connector = DataConnector.getDBConnector(appConfig.ConnnectionString);

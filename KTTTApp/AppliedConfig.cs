@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using System.IO;
 using Microsoft.Extensions.Configuration;
 
 namespace KTTTApp
@@ -15,24 +14,27 @@ namespace KTTTApp
 
         public CultureInfo Culture = null;
 
-        public AppliedConfig(string fileName = "appsettings.json")
+        public AppliedConfig(IConfigurationBuilder config)
         {
-            // parse config file
-            try {
-                IConfigurationRoot configuration = new ConfigurationBuilder()
-                                                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-                                                .AddJsonFile(fileName, false)
-                                                .Build();
-
-                updateCultureInfo(configuration);
-                updateConnectionString(configuration);  
-                
-                Console.WriteLine($" Using culture {Culture.ToString()} and DB connection {ConnnectionString}.");
-
-            } catch (System.IO.FileNotFoundException)
+            if (config == null)
             {
                 Culture = new CultureInfo(DEFAULT_CULTURE_STRING);
-                Console.WriteLine($"Error 1: Configuration file appsettings.json missing. Using fallback.");
+                Console.WriteLine($"Error 1: Null reference to configuration object passed. Using fallback.");
+            } else {
+                // parse config file
+                try {
+                    var configuration = config.Build();
+
+                    updateCultureInfo(configuration);
+                    updateConnectionString(configuration);  
+                    
+                    Console.WriteLine($" Using culture {Culture.ToString()} and DB connection {ConnnectionString}.");
+
+                } catch (System.IO.FileNotFoundException)
+                {
+                    Culture = new CultureInfo(DEFAULT_CULTURE_STRING);
+                    Console.WriteLine($"Error 1: Configuration file appsettings.json missing. Using fallback.");
+                }
             }
         }
 

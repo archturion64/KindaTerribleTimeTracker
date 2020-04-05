@@ -17,8 +17,16 @@ namespace KTTTApp
 
         private readonly IDataAccess dbAccess;
 
-        public WorkDay(in CultureInfo cultureInf, in IDataAccess dataAcc)
+        public WorkDay(CultureInfo cultureInf, IDataAccess dataAcc)
         {
+            if (cultureInf == null)
+            {
+                throw new System.ArgumentNullException("Parameter cannot be null", "cultureInf");
+            } else if (dataAcc == null)
+            {
+                throw new System.ArgumentNullException("Parameter cannot be null", "dataAcc");
+            }
+
             culture = cultureInf;
             dbAccess = dataAcc;
 

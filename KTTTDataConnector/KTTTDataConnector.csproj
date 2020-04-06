@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\KTTTDataInterface\KTTTDataInterface.csproj" />
     <ProjectReference Include="..\KTTTSQLiteConnector\KTTTSQLiteConnector.csproj" />
+    <ProjectReference Include="..\KTTTEntityFwConnector\KTTTEntityFwConnector.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,16 +1,13 @@
-﻿namespace KTTTDataInterface
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace KTTTDataInterface
 {
     /// <summary>
     /// Object that is describing a database table.
     /// </summary>
     public class WorkDayModel
     {
-        /// <summary>
-        /// Incrementing key for internal database usage.
-        /// </summary>
-        /// <value>unique int</value>
-        public int key { get; set; }
-
         /// <summary>
         /// The number of a week in the callender.
         /// </summary>
@@ -21,6 +18,7 @@
         /// A unique entry, since one employee cannot have 2 work days with the same date.
         /// </summary>
         /// <value>unique string</value>
+        [Key]
         public string date { get; set; }
 
         /// <summary>

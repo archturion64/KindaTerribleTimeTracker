@@ -20,7 +20,7 @@ namespace KTTTApp
         /// connection string as expected by the DB connector
         /// </summary>
         /// <value> DB specific string</value>
-        public string ConnnectionString { get; private set; } = "Data Source=presence.db;Version=3;";
+        public string ConnnectionString { get; private set; } = "Data Source=presence.db;";
 
         /// <summary>
         /// used to determine date/time format 

@@ -15,14 +15,14 @@ namespace KTTTSQLiteConnector
     {
         private readonly string connectionString;
 
-        public SQLiteDataAccess(string connString)
+        public SQLiteDataAccess(in string connString)
         {
             connectionString = connString;
             using (IDbConnection cnn = new SQLiteConnection(connectionString))
             {
                 try
                 {
-                    cnn.Execute("CREATE TABLE IF NOT EXISTS \"presence\" (\"key\" INTEGER NOT NULL UNIQUE, \"calWeek\" INTEGER, \"date\" TEXT UNIQUE, \"startTime\" TEXT, \"endTime\" TEXT, \"hoursActive\" REAL, PRIMARY KEY(\"key\"))");
+                    cnn.Execute("CREATE TABLE IF NOT EXISTS \"WorkDay\" (\"calWeek\" INTEGER, \"date\" TEXT UNIQUE, \"startTime\" TEXT, \"endTime\" TEXT, \"hoursActive\" REAL, PRIMARY KEY(\"date\"))");
                 } catch (Exception)
                 {
                     Console.WriteLine($"Error 14: Failed to create Database table.");
@@ -40,7 +40,7 @@ namespace KTTTSQLiteConnector
             {
                 try
                 {
-                    var output = cnn.Query<WorkDayModel>("SELECT * FROM presence", new DynamicParameters());
+                    var output = cnn.Query<WorkDayModel>("SELECT * FROM WorkDay", new DynamicParameters());
                     return output.ToList();
                 } catch (Exception) 
                 {
@@ -60,7 +60,7 @@ namespace KTTTSQLiteConnector
             {
                 try
                 {
-                    cnn.Execute("insert or replace into presence (date, startTime, endTime, calWeek)values (@date, COALESCE((select startTime from presence where date = @date), @startTime), @endTime, @calWeek)", entry);
+                    cnn.Execute("insert or replace into WorkDay (date, startTime, endTime, calWeek)values (@date, COALESCE((select startTime from WorkDay where date = @date), @startTime), @endTime, @calWeek)", entry);
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 12: Database missing or Table is corrupted!");
@@ -78,7 +78,7 @@ namespace KTTTSQLiteConnector
             {
                 try
                 {
-                    cnn.Execute("update presence set endTime = @endTime where date = @date", entry);
+                    cnn.Execute("update WorkDay set endTime = @endTime where date = @date", entry);
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 13: Database missing or Table is corrupted!");

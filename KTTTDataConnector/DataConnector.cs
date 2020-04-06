@@ -1,5 +1,6 @@
 ﻿using KTTTDataInterface;
 using KTTTSQLiteConnector;
+using KTTTEntityFwConnector;
 
 namespace KTTTDataConnector
 {
@@ -16,6 +17,7 @@ namespace KTTTDataConnector
         /// <returns>instance to use for database functionality</returns>
         public static IDataAccess getDBConnector(in string dbConnectionString)
         {
+            //return new EntityFwDataAccess(connString: dbConnectionString);
             return new SQLiteDataAccess(connString: dbConnectionString);
         }
     }

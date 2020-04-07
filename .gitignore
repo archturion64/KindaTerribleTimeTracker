@@ -7,6 +7,9 @@ KTTTAppTest/TestResults/
 KTTTApp/presence.db
 KTTTDataConnector/bin/
 KTTTDataConnector/obj/
+KTTTDataConnectorTest/bin/
+KTTTDataConnectorTest/obj/
+KTTTDataConnectorTest/TestResults/
 KTTTDataInterface/bin/
 KTTTDataInterface/obj/
 KTTTSQLiteConnector/bin/

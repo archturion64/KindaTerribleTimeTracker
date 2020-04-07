@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Globalization;
 using Moq;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
 using KTTTApp;
+using KTTTDataInterface;
 
 namespace KTTTAppTest
 {
@@ -34,34 +34,41 @@ namespace KTTTAppTest
         [TestMethod]
         public void Constructor_ininitializedConfig()
         {
-            var testedObj = new AppliedConfig(confBuildMock.Object);
+            var SUT = new AppliedConfig(confBuildMock.Object);
 
-            testedObj.Should().NotBeNull();
+            SUT.Should().NotBeNull();
         }
 
         [TestMethod]
         public void Constructor_cultureNotNull()
         {
-            var testedObj = new AppliedConfig(confBuildMock.Object);
+            var SUT = new AppliedConfig(confBuildMock.Object);
 
-            testedObj.Culture.Should().NotBeNull();
+            SUT.Culture.Should().NotBeNull();
         }
 
         [TestMethod]
         public void Constructor_onNullConfig()
         {
-            var testedObj = new AppliedConfig(null);
+            var SUT = new AppliedConfig(null);
 
-            testedObj.Should().NotBeNull();
+            SUT.Should().NotBeNull();
         }
 
         [TestMethod]
         public void Constructor_defaultCulture()
         {
-            var testedObj = new AppliedConfig(null);
+            var SUT = new AppliedConfig(null);
 
-            testedObj.Culture.ToString().Should().BeEquivalentTo(new CultureInfo("en-US").ToString());
+            SUT.Culture.ToString().Should().BeEquivalentTo(new CultureInfo("en-US").ToString());
         }
 
+        [TestMethod]
+        public void Constructor_defaultConnType()
+        {
+            var SUT = new AppliedConfig(null);
+
+            SUT.ConnectorType.Should().Be(EDataConnector.SQLite);
+        }
     }
 }

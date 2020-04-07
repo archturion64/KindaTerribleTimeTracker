@@ -15,10 +15,18 @@ namespace KTTTDataConnector
         /// </summary>
         /// <param name="dbConnectionString"> database specific connection string</param>
         /// <returns>instance to use for database functionality</returns>
-        public static IDataAccess getDBConnector(in string dbConnectionString)
+        public static IDataAccess getDBConnector(in string dbConnectionString, EDataConnector type)
         {
-            //return new EntityFwDataAccess(connString: dbConnectionString);
-            return new SQLiteDataAccess(connString: dbConnectionString);
+            switch (type)
+            {
+                case EDataConnector.Entity:
+                return new EntityFwDataAccess(connString: dbConnectionString);
+
+                case EDataConnector.SQLite:
+                // fall-through
+                default:
+                return new SQLiteDataAccess(connString: dbConnectionString);
+            } 
         }
     }
 }

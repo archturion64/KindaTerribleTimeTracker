@@ -44,9 +44,9 @@ namespace KTTTAppTest
         {
             var culture = new CultureInfo("");
 
-            var testedObj = new WorkDay(culture, dataAccMock.Object);
+            var SUT = new WorkDay(culture, dataAccMock.Object);
 
-            testedObj.Should().NotBeNull();
+            SUT.Should().NotBeNull();
         }
 
         [TestMethod]
@@ -56,9 +56,9 @@ namespace KTTTAppTest
             string expectedDate = DateTime.Now.ToString("ddd dd.MM.yyyy", culture);
             wdModel.date = expectedDate;
 
-            var testedObj = new WorkDay(culture, dataAccMock.Object);
+            var SUT = new WorkDay(culture, dataAccMock.Object);
 
-            testedObj.entryToday.date.Should().BeEquivalentTo(expectedDate);
+            SUT.entryToday.date.Should().BeEquivalentTo(expectedDate);
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace KTTTAppTest
         {
             var culture = new CultureInfo("dummy"); 
 
-            var testedObj = new WorkDay(culture, dataAccMock.Object);
+            var SUT = new WorkDay(culture, dataAccMock.Object);
 
             dataAccMock.Verify(v => v.StoreEntry(in It.Ref<WorkDayModel>.IsAny), Times.Once());
         }
@@ -78,9 +78,9 @@ namespace KTTTAppTest
             string expectedDate = DateTime.Now.ToString("ddd dd.MM.yyyy", culture);
             wdModel.date = expectedDate;
 
-            var testedObj = new WorkDay(culture, dataAccMock.Object);
+            var SUT = new WorkDay(culture, dataAccMock.Object);
 
-            testedObj.entryToday.date.Should().BeEquivalentTo(expectedDate);
+            SUT.entryToday.date.Should().BeEquivalentTo(expectedDate);
         }
 
         [TestMethod]

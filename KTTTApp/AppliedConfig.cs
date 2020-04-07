@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
+using KTTTDataInterface;
 
 namespace KTTTApp
 {
@@ -15,6 +16,12 @@ namespace KTTTApp
         /// Key in the connection string section of the application config.
         /// </summary>
         private const string CONNECTION_STRING_KEY = "Default";
+
+        /// <summary>
+        /// type of the connector that shal be used for data storage.
+        /// </summary>
+        /// <value>one of pre-defined connector values</value>
+        public EDataConnector ConnectorType { get; private set; } = EDataConnector.SQLite;
 
         /// <summary>
         /// connection string as expected by the DB connector
@@ -36,16 +43,17 @@ namespace KTTTApp
             if (config == null)
             {
                 Culture = new CultureInfo(DEFAULT_CULTURE_STRING);
-                Console.WriteLine($"Error 1: Null reference to configuration object passed. Using fallback.");
+                Console.WriteLine($"Error 6: Null reference to configuration object passed. Using fallback.");
             } else {
                 // parse config file
                 try {
                     var configuration = config.Build();
 
                     updateCultureInfo(configuration);
-                    updateConnectionString(configuration);  
+                    updateConnectionString(configuration);
+                    updateConnectorType(configuration);
                     
-                    Console.WriteLine($" Using culture {Culture.ToString()} and DB connection {ConnnectionString}.");
+                    Console.WriteLine($" Using culture {Culture.ToString()}, connector type {ConnectorType.ToString()} and DB connection {ConnnectionString}.");
 
                 } catch (System.IO.FileNotFoundException)
                 {
@@ -92,6 +100,25 @@ namespace KTTTApp
             if(!string.IsNullOrEmpty(connection))
             {
                 ConnnectionString = connection;
+            }
+        }
+
+        /// <summary>
+        /// parse connector preference from config and apply to this object's property.
+        /// </summary>
+        /// <param name="configuration"></param>
+        private void updateConnectorType(in IConfigurationRoot configuration)
+        {
+            string connectorString = configuration.GetSection("AppOptions")["KTTTConnectorType"];
+            
+            if(connectorString == EDataConnector.SQLite.ToString())
+            {
+                ConnectorType = EDataConnector.SQLite;
+            } else if (connectorString == EDataConnector.Entity.ToString())
+            {
+                ConnectorType = EDataConnector.Entity;
+            } else {
+                Console.WriteLine($"Error 7: Unrecognisable KTTTConnectorType in config. Using fallback.");
             }
         }
     }

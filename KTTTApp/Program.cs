@@ -16,7 +16,7 @@ namespace KTTTApp
                                 .AddJsonFile("appsettings.json", false));
 
             // establish data access
-            IDataAccess connector = DataConnector.getDBConnector(appConfig.ConnnectionString);
+            IDataAccess connector = DataConnector.getDBConnector(appConfig.ConnnectionString, appConfig.ConnectorType);
 
             WorkDay workDay = new WorkDay(appConfig.Culture, connector);
 

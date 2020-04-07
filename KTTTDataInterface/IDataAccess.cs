@@ -14,15 +14,10 @@ namespace KTTTDataInterface
         List<WorkDayModel> GetEntries();
 
         /// <summary>
-        /// Add a new entry.
+        /// Add a new entry or update an alleady existing entry.
+        /// On update, date and start time shall not be overwritten.
         /// </summary>
         /// <param name="entry">Data entry that should be stored.</param>
         void StoreEntry(in WorkDayModel entry);
-
-        /// <summary>
-        /// Update an entry.
-        /// </summary>
-        /// <param name="entry">Alleady existing entry that should be updated.</param>
-        void UpdateEntry(in WorkDayModel entry);
     }
 }

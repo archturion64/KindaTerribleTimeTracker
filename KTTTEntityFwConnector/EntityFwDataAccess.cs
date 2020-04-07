@@ -41,7 +41,7 @@ namespace KTTTEntityFwConnector
         }
 
         /// <summary>
-        /// Add new entry.
+        /// Add new entry or update existing one.
         /// </summary>
         /// <param name="entry"> Data model object</param>
         public void StoreEntry(in WorkDayModel entry)
@@ -58,15 +58,6 @@ namespace KTTTEntityFwConnector
                 
                 dataContext.SaveChanges();
             }
-        }
-
-        /// <summary>
-        /// Update an existing entry.
-        /// </summary>
-        /// <param name="entry">Data model object</param>
-        public void UpdateEntry(in WorkDayModel entry)
-        {
-            StoreEntry(entry);
         }
     }
 }

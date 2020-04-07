@@ -51,7 +51,7 @@ namespace KTTTSQLiteConnector
         }
 
         /// <summary>
-        /// Add new entry.
+        /// Add new entry or update existing one.
         /// </summary>
         /// <param name="entry"> Data model object</param>
         public void StoreEntry(in WorkDayModel entry)
@@ -64,24 +64,6 @@ namespace KTTTSQLiteConnector
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 12: Database missing or Table is corrupted!");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Update an existing entry.
-        /// </summary>
-        /// <param name="entry">Data model object</param>
-        public void UpdateEntry(in WorkDayModel entry)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(connectionString))
-            {
-                try
-                {
-                    cnn.Execute("update WorkDay set endTime = @endTime where date = @date", entry);
-                } catch (Exception) 
-                {
-                    Console.WriteLine($"Error 13: Database missing or Table is corrupted!");
                 }
             }
         }

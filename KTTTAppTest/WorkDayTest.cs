@@ -29,7 +29,6 @@ namespace KTTTAppTest
                 hoursActive = 0
             };
             dataAccMock.Setup(x => x.StoreEntry(in wdModel));
-            dataAccMock.Setup(x => x.UpdateEntry(in wdModel));
             dataAccMock.Setup(x => x.GetEntries()).Returns(new List<WorkDayModel>());
         }
 

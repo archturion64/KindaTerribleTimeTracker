@@ -77,15 +77,7 @@ namespace KTTTApp
         /// <param name="e"></param>
         private void ProgressTime(Object source, System.Timers.ElapsedEventArgs e)
         {
-            var now = generateNewEntry(culture: culture);
-            // for those that work past midnight
-            if (now.date != entryToday.date)
-            {
-                entryToday = now;
-                dbAccess.StoreEntry(entryToday);
-            } else {
-                dbAccess.UpdateEntry(now);
-            }
+            dbAccess.StoreEntry(generateNewEntry(culture: culture));
         }
 
         /// <summary>

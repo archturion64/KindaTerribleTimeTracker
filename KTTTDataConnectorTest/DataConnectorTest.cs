@@ -8,7 +8,7 @@ using KTTTEntityFwConnector;
 namespace KTTTDataConnectorTest
 {
     [TestClass]
-    public class UnitTest1
+    public class DataConnectorTest
     {
         [TestMethod]
         public void getDBConnector_typeSqliteNotNullRef()

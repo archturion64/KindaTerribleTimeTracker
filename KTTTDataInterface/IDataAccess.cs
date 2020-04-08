@@ -6,10 +6,16 @@ namespace KTTTDataInterface
     /// Configuration item specifying which database/source to use.
     /// </summary>
     public enum EDataConnector
-    {
+    { 
         SQLite,
         Entity
     }
+
+    /// <summary>
+    /// interval used for setting up the timer callback delay,
+    /// practicly determining the frequency of database updates.
+    /// </summary>
+    public enum ETimerInterval {Minutes = 10};
 
     /// <summary>
     /// Definition of basic functionality, a Data storage provider Object should expose.

@@ -58,7 +58,7 @@ namespace KTTTAppTest
 
             var SUT = new WorkDay(culture, dataAccMock.Object);
 
-            SUT.entryToday.date.Should().BeEquivalentTo(expectedDate);
+            SUT.entryToday.ToString("ddd dd.MM.yyyy", culture).Should().BeEquivalentTo(expectedDate);
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace KTTTAppTest
 
             var SUT = new WorkDay(culture, dataAccMock.Object);
 
-            SUT.entryToday.date.Should().BeEquivalentTo(expectedDate);
+            SUT.entryToday.ToString("ddd dd.MM.yyyy", culture).Should().BeEquivalentTo(expectedDate);
         }
 
         [TestMethod]

@@ -14,13 +14,8 @@ namespace KTTTApp
         /// <summary>
         /// most current value for WorkDayModel
         /// </summary>
-        /// <value>Model of DB relavant information</value>
-        public WorkDayModel entryToday { get; private set; }
-        
-        /// <summary>
-        /// interval in ms used for setting up the timer callback delay
-        /// </summary>
-        private const int TIMER_INTERVAL = 600000;
+        /// <value>date time</value>
+        public DateTime entryToday { get; private set; } = DateTime.Now;
 
         /// <summary>
         /// mechanism for progressing elapsed time during the work day
@@ -58,15 +53,14 @@ namespace KTTTApp
             dbAccess = dataAcc;
 
             timer = new System.Timers.Timer();
-            timer.Interval = TIMER_INTERVAL;
+            timer.Interval = TimeSpan.FromMinutes((int)ETimerInterval.Minutes).TotalMilliseconds;
+
             timer.Elapsed += ProgressTime;
             timer.AutoReset = true;
             timer.Enabled = true; // start timer
 
             // generate starting entry
-            entryToday = generateNewEntry(culture: culture);
-
-            dbAccess.StoreEntry(entryToday);
+            dbAccess.StoreEntry(generateNewEntry(culture: culture));
         }
 
         /// <summary>
@@ -105,16 +99,20 @@ namespace KTTTApp
         /// </summary>
         /// <param name="culture"></param>
         /// <returns>new DB model data</returns>
-        private WorkDayModel generateNewEntry(in CultureInfo culture)
+        public WorkDayModel generateNewEntry(in CultureInfo culture)
         {
-            DateTime startWork = DateTime.Now;
+            DateTime now = DateTime.Now;
+            // get time diff from previous stored val;
+            TimeSpan interval = now - entryToday;
+            
+            entryToday = now;
 
             return new WorkDayModel{
-                calWeek = getCalenderWeek(startWork, culture),
-                date = startWork.ToString("ddd dd.MM.yyyy", culture),
-                startTime = startWork.ToString("T", culture),
-                endTime = startWork.ToString("T", culture),
-                hoursActive = 0
+                calWeek = getCalenderWeek(entryToday, culture),
+                date = entryToday.ToString("ddd dd.MM.yyyy", culture),
+                startTime = entryToday.ToString("T", culture),
+                endTime = entryToday.ToString("T", culture),
+                hoursActive = (float)Math.Round(interval.TotalHours, 2, MidpointRounding.ToZero)
             };
         }
 

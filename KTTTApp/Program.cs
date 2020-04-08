@@ -23,14 +23,18 @@ namespace KTTTApp
             // closest thing to UI at the moment
             foreach (var entry in connector.GetEntries())
             {
-                Console.WriteLine("Date: {0} Week: {1} Start Time {2}, End Time {3}",
+                Console.WriteLine("Date: {0} Week: {1} Start Time {2}, End Time {3} and active hours {4}",
                                   entry.date,
                                   entry.calWeek.ToString("00"),
                                   entry.startTime,
-                                  entry.endTime);
+                                  entry.endTime,
+                                  entry.hoursActive);
             }
             Console.WriteLine("Press Enter to exit...");
             Console.ReadLine();
+
+            // update db before quiting
+            connector.StoreEntry(workDay.generateNewEntry(appConfig.Culture));
         }
     }
 }

@@ -60,7 +60,7 @@ namespace KTTTSQLiteConnector
             {
                 try
                 {
-                    cnn.Execute("insert or replace into WorkDay (date, startTime, endTime, calWeek)values (@date, COALESCE((select startTime from WorkDay where date = @date), @startTime), @endTime, @calWeek)", entry);
+                    cnn.Execute("insert or replace into WorkDay (date, startTime, endTime, calWeek, hoursActive)values (@date, COALESCE((select startTime from WorkDay where date = @date), @startTime), @endTime, @calWeek, COALESCE((select hoursActive from WorkDay where date = @date) + @hoursActive, @hoursActive))", entry);
                 } catch (Exception) 
                 {
                     Console.WriteLine($"Error 12: Database missing or Table is corrupted!");

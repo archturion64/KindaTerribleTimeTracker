@@ -54,6 +54,7 @@ namespace KTTTEntityFwConnector
                     dataContext.WorkDay.Add(entry);
                 } else {
                     matchedEntity.endTime = entry.endTime;
+                    matchedEntity.hoursActive +=  entry.hoursActive;
                 }
                 
                 dataContext.SaveChanges();

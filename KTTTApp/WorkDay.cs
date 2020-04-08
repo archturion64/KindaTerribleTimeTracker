@@ -60,7 +60,7 @@ namespace KTTTApp
             timer.Enabled = true; // start timer
 
             // generate starting entry
-            dbAccess.StoreEntry(generateNewEntry(culture: culture));
+            dbAccess.StoreEntry(generateNewEntry());
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace KTTTApp
         /// <param name="e"></param>
         private void ProgressTime(Object source, System.Timers.ElapsedEventArgs e)
         {
-            dbAccess.StoreEntry(generateNewEntry(culture: culture));
+            dbAccess.StoreEntry(generateNewEntry());
         }
 
         /// <summary>
@@ -97,9 +97,8 @@ namespace KTTTApp
         /// <summary>
         /// Generate new WorkDayModel with current time and date.
         /// </summary>
-        /// <param name="culture"></param>
         /// <returns>new DB model data</returns>
-        public WorkDayModel generateNewEntry(in CultureInfo culture)
+        public WorkDayModel generateNewEntry()
         {
             DateTime now = DateTime.Now;
             // get time diff from previous stored val;

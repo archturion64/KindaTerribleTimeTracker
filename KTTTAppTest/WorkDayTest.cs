@@ -107,5 +107,17 @@ namespace KTTTAppTest
                 .Be("Parameter cannot be null");
         }
 
+        [TestMethod]
+        public void Constructor_generateEntry()
+        {
+            var culture = new CultureInfo("de-DE"); 
+            var obj = new WorkDay(culture, dataAccMock.Object);
+
+            var SUT = obj.generateNewEntry();
+
+            SUT.hoursActive.Should().Be(0);
+            SUT.date.Should().BeEquivalentTo(DateTime.Now.ToString("ddd dd.MM.yyyy", culture));
+        }
+
     }
 }

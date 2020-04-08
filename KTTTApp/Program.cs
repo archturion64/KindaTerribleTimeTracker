@@ -28,13 +28,13 @@ namespace KTTTApp
                                   entry.calWeek.ToString("00"),
                                   entry.startTime,
                                   entry.endTime,
-                                  entry.hoursActive);
+                                  entry.hoursActive.ToString("0.00"));
             }
             Console.WriteLine("Press Enter to exit...");
             Console.ReadLine();
 
             // update db before quiting
-            connector.StoreEntry(workDay.generateNewEntry(appConfig.Culture));
+            connector.StoreEntry(workDay.generateNewEntry());
         }
     }
 }
